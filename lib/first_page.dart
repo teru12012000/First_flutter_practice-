@@ -6,47 +6,32 @@ import 'package:flutter/material.dart';
 
 class FirstPage extends StatelessWidget {
   const FirstPage({super.key});
-
+  static const pageList = [ProfilePage(), SkillPage(), RunningPage()];
+  static const pagetitle = [
+    "プロフィール",
+    "スキル",
+    "ランニング",
+  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("TERUSIの自己紹介"),
-      ),
-      body: Center(
-          child: Column(children: [
-        ElevatedButton(
-          child: const Text("プロフィール"),
-          onPressed: () {
-            Navigator.push(context,
-                MaterialPageRoute(builder: (context) => const ProfilePage()));
-          },
+        appBar: AppBar(
+          title: const Text("TERUSIの自己紹介"),
         ),
-        ElevatedButton(
-          child: const Text("スキル"),
-          onPressed: () {
-            Navigator.push(context,
-                MaterialPageRoute(builder: (context) => const SkillPage()));
-          },
-        ),
-        ElevatedButton(
-          child: const Text("ランニング"),
-          onPressed: () {
-            Navigator.push(context,
-                MaterialPageRoute(builder: (context) => const RunningPage()));
-          },
-        ),
-      ])),
-    );
+        body: ListView.builder(
+            itemCount: pageList.length,
+            itemBuilder: (BuildContext context, int index) {
+              return Center(
+                child: ElevatedButton(
+                  child: Text(pagetitle[index]),
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => pageList[index]));
+                  },
+                ),
+              );
+            }));
   }
 }
-
-/* 
-ElevatedButton(
-            child: const Text("押し"),
-            onPressed: () {
-            Navigator.push(
-              context, MaterialPageRoute(builder: (context) => SecoundPage()));
-            },
-          )
-*/
